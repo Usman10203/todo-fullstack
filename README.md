@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Next.js To-Do App with Authentication
 
-## Getting Started
+This is a modern and minimalistic To-Do App built using Next.js. It includes user authentication (sign-up and login) and allows users to manage their tasks efficiently.
 
-First, run the development server:
+✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+✅ User Authentication (Sign Up & Login)✅ Secure Session Handling✅ Add, Edit, and Delete Todos✅ Responsive Design with Tailwind CSS✅ Next.js API Routes for Backend✅ Fast and Optimized Performance
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🚀 Tech Stack
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Next.js – React framework for performance & scalability
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tailwind CSS – Utility-first CSS framework
 
-## Learn More
+Prisma – ORM for database management
 
-To learn more about Next.js, take a look at the following resources:
+MongoDB / PostgreSQL – Database to store todos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+NextAuth.js – Authentication handling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📂 Project Structure
 
-## Deploy on Vercel
+📦 nextjs-todo-app
+├── 📂 app             # Next.js App Router
+│   ├── 📂 api        # API Routes
+│   ├── 📂 auth       # Authentication Logic
+│   ├── 📂 dashboard  # User Dashboard
+│   ├── 📜 page.js    # Main Landing Page
+├── 📂 components     # Reusable UI Components
+├── 📂 styles         # Global Styles
+├── 📜 .env           # Environment Variables
+├── 📜 next.config.js # Next.js Configuration
+└── 📜 README.md      # Documentation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🛠️ Getting Started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1️⃣ Clone the Repository
+
+git clone https://github.com/your-username/nextjs-todo-app.git
+cd nextjs-todo-app
+
+2️⃣ Install Dependencies
+
+npm install  # or yarn install or pnpm install
+
+3️⃣ Set Up Environment Variables
+
+Create a .env.local file in the root directory and add your environment variables:
+
+DATABASE_URL=your-database-url
+NEXTAUTH_SECRET=your-secret-key
+NEXTAUTH_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+4️⃣ Run the Development Server
+
+npm run dev  # or yarn dev or pnpm dev
+
+Now, open http://localhost:3000 in your browser to use the app.
+
+📌 API Endpoints
+
+Method
+
+Endpoint
+
+Description
+
+POST
+
+/api/auth
+
+User authentication
+
+GET
+
+/api/todo
+
+Fetch user todos
+
+POST
+
+/api/todo
+
+Add a new todo
+
+PUT
+
+/api/todo
+
+Edit an existing todo
+
+DELETE
+
+/api/todo
+
+Delete a todo
+
+🌍 Deployment
+
+The easiest way to deploy this project is via Vercel:
+
+vercel deploy
+
+Or, check out Next.js deployment documentation for more options.
+
+🙌 Contributing
+
+Fork the project
+
+Create your feature branch (git checkout -b feature-name)
+
+Commit your changes (git commit -m 'Add new feature')
+
+Push to the branch (git push origin feature-name)
+
+Open a Pull Request
+
+📜 License
+
+This project is licensed under the MIT License.
+
+💡 Happy coding! 🚀
+
