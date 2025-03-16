@@ -79,7 +79,7 @@ const LoginForm = () => {
                     type="submit"
                     className="bg-orange-300 hover:bg-orange-400 transition-colors duration-300 mt-4 rounded-md px-6 py-2 w-full max-w-xs text-lg font-semibold shadow-md"
                 >
-                    Credential Login
+                    Login
                 </button>
             </form>
 
