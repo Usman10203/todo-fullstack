@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/todo/page.js"  ],
+, "src/app/todo/page.js", "src/app/edit-todo/page.js"  ],
   "exclude": [
     "node_modules"
   ]

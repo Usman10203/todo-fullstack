@@ -37,50 +37,58 @@ const RegistrationForm = () => {
 
     return (
         <>
+            <h1 style={{ fontSize: "30px" }}>Registeration Form</h1>
             <form
                 onSubmit={handleSubmit}
-                className="my-5 flex flex-col items-center border p-3 border-gray-200 rounded-md"
+                className="my-5 flex flex-col items-center border p-5 border-gray-300 rounded-md shadow-lg w-full max-w-md mx-auto"
             >
-                <div className="my-2">
-                    <label htmlFor="name">Name</label>
+                <div className="w-full my-3">
+                    <label htmlFor="name" className="block mb-1 text-lg">Name</label>
                     <input
-                        className="border mx-2 border-gray-500 rounded"
+                        className="w-full p-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-orange-300 outline-none"
                         type="text"
                         name="name"
                         id="name"
                         value={formData.name}
                         onChange={handleChange}
+                        required
                     />
                 </div>
-                <div className="my-2">
-                    <label htmlFor="email">Email Address</label>
+
+                <div className="w-full my-3">
+                    <label htmlFor="email" className="block mb-1 text-lg">Email Address</label>
                     <input
-                        className="border mx-2 border-gray-500 rounded"
+                        className="w-full p-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-orange-300 outline-none"
                         type="email"
                         name="email"
                         id="email"
                         value={formData.email}
                         onChange={handleChange}
+                        required
                     />
                 </div>
-                <div className="my-2">
-                    <label htmlFor="password">Password</label>
+
+                <div className="w-full my-3">
+                    <label htmlFor="password" className="block mb-1 text-lg">Password</label>
                     <input
-                        className="border mx-2 border-gray-500 rounded"
+                        className="w-full p-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-orange-300 outline-none"
                         type="password"
                         name="password"
                         id="password"
                         value={formData.password}
                         onChange={handleChange}
+                        required
                     />
                 </div>
+
                 <button
                     type="submit"
-                    className="bg-orange-300 mt-4 rounded flex justify-center items-center w-36"
+                    className="bg-orange-300 hover:bg-orange-400 transition-colors duration-300 mt-4 rounded-md px-6 py-2 w-full max-w-xs text-lg font-semibold shadow-md"
                 >
                     Register
                 </button>
             </form>
+
             <SocialLogins />
         </>
     );

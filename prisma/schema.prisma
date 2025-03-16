@@ -10,18 +10,18 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
+  id       String   @unique
   name     String
   email    String   @unique
-  password String
+  password  String? 
   createdAt DateTime @default(now())
    todos     Todo[] 
 }
 
 model Todo {
-  id        Int     @id @default(autoincrement())
+  id        String  @id @default(uuid()) @unique
   subject   String
-  userId    Int
+  userId    String
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }

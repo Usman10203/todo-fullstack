@@ -14,54 +14,43 @@ export const {
     callbacks: {
         async session({ session, token }) {
             if (session.user) {
-                session.user.id = token.id;
+                session.user.id = token.id;  // Ensure session has user ID
             }
             return session;
         },
-        async jwt({ token, user }) {
-            if (user) {
-                token.id = user.id;
+        async jwt({ token, user, account }) {
+            if (account?.provider === "google") {
+                // Check if user exists in DB
+                let existingUser = await prisma.user.findUnique({
+                    where: { email: token.email },
+                });
+
+                if (!existingUser) {
+                    // Create user in DB if not found
+                    existingUser = await prisma.user.create({
+                        data: {
+                            email: token.email,
+                            name: token.name,
+                            id: token.sub,  // Google user ID
+                        },
+                    });
+                }
+
+                token.id = existingUser.id;  // Assign DB ID to session
+            } else if (user) {
+                token.id = user.id; // Credentials users already have an ID
             }
+
             return token;
         },
     },
+
     session: {
         strategy: 'jwt',
     },
 
     providers: [
-        // CredentialsProvider({
-        //     credentials: {
-        //         email: {},
-        //         password: {},
-        //     },
-        //     async authorize(credentials) {
-        //         if (credentials === null) return null;
 
-        //         try {
-        //             const user = await User.findOne({
-        //                 email: credentials?.email
-        //             })
-        //             console.log(user);
-        //             if (user) {
-        //                 const isMatch = await bcrypt.compare(
-        //                     credentials.password,
-        //                     user.password
-        //                 );
-
-        //                 if (isMatch) {
-        //                     return user;
-        //                 } else {
-        //                     throw new Error("Email or Password is not correct");
-        //                 }
-        //             } else {
-        //                 throw new Error("User not found");
-        //             }
-        //         } catch (error) {
-        //             throw new Error(error);
-        //         }
-        //     },
-        // }),
         CredentialsProvider({
             credentials: {
                 email: { label: "Email", type: "text" },

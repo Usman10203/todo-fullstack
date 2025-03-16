@@ -58,6 +58,7 @@ const LoginForm = () => {
                         id="email"
                         value={formData.email}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
@@ -70,6 +71,7 @@ const LoginForm = () => {
                         id="password"
                         value={formData.password}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 

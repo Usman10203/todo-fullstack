@@ -13,13 +13,13 @@ export async function GET(req) {
             return NextResponse.json({ error: "User ID is required" }, { status: 400 });
         }
 
-        const userIdInt = parseInt(userId);
-        if (isNaN(userIdInt)) {
-            return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
-        }
+        // const userIdInt = parseInt(userId);
+        // if (isNaN(userIdInt)) {
+        //     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
+        // }
 
         const todos = await prisma.todo.findMany({
-            where: { userId: userIdInt },
+            where: { userId: userId },
         });
 
         return NextResponse.json(todos, { status: 200 });
@@ -37,13 +37,19 @@ export async function POST(req) {
             return NextResponse.json({ error: "Missing fields" }, { status: 400 });
         }
 
-        const userIdInt = parseInt(userId);
-        if (isNaN(userIdInt)) {
-            return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
+        console.log('at route', userId, subject);
+
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+
+        if (!user) {
+            return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
 
+
         const newTodo = await prisma.todo.create({
-            data: { subject, userId: userIdInt },
+            data: { subject, userId: userId },
         });
 
         return NextResponse.json(newTodo, { status: 201 });
@@ -63,7 +69,7 @@ export async function PUT(req) {
         }
 
         const updatedTodo = await prisma.todo.update({
-            where: { id: parseInt(id) },
+            where: { id: id },
             data: { subject },
         });
 
@@ -85,19 +91,19 @@ export async function DELETE(req) {
         }
 
         const todo = await prisma.todo.findUnique({
-            where: { id: parseInt(todoId) },
+            where: { id: todoId },
         });
 
         if (!todo) {
             return NextResponse.json({ error: "Todo not found" }, { status: 404 });
         }
 
-        if (todo.userId !== parseInt(userId)) {
-            return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-        }
+        // if (todo.userId !== parseInt(userId)) {
+        //     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+        // }
 
         await prisma.todo.delete({
-            where: { id: parseInt(todoId) },
+            where: { id: todoId },
         });
 
         return NextResponse.json({ message: "Todo deleted successfully" }, { status: 200 });
