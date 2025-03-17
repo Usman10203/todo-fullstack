@@ -26,7 +26,6 @@ const RegistrationForm = () => {
 
         try {
             const response = await axios.post('/api/register', formData);
-            console.log(`response`, response);
             if (response.status === 201) {
                 router.push('/');
             }

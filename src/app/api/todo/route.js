@@ -13,11 +13,6 @@ export async function GET(req) {
             return NextResponse.json({ error: "User ID is required" }, { status: 400 });
         }
 
-        // const userIdInt = parseInt(userId);
-        // if (isNaN(userIdInt)) {
-        //     return NextResponse.json({ error: "Invalid User ID" }, { status: 400 });
-        // }
-
         const todos = await prisma.todo.findMany({
             where: { userId: userId },
         });
@@ -37,8 +32,6 @@ export async function POST(req) {
             return NextResponse.json({ error: "Missing fields" }, { status: 400 });
         }
 
-        console.log('at route', userId, subject);
-
         const user = await prisma.user.findUnique({
             where: { id: userId },
         });
@@ -46,7 +39,6 @@ export async function POST(req) {
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
-
 
         const newTodo = await prisma.todo.create({
             data: { subject, userId: userId },
@@ -97,10 +89,6 @@ export async function DELETE(req) {
         if (!todo) {
             return NextResponse.json({ error: "Todo not found" }, { status: 404 });
         }
-
-        // if (todo.userId !== parseInt(userId)) {
-        //     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-        // }
 
         await prisma.todo.delete({
             where: { id: todoId },

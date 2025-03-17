@@ -14,31 +14,29 @@ export const {
     callbacks: {
         async session({ session, token }) {
             if (session.user) {
-                session.user.id = token.id;  // Ensure session has user ID
+                session.user.id = token.id;
             }
             return session;
         },
         async jwt({ token, user, account }) {
             if (account?.provider === "google") {
-                // Check if user exists in DB
                 let existingUser = await prisma.user.findUnique({
                     where: { email: token.email },
                 });
 
                 if (!existingUser) {
-                    // Create user in DB if not found
                     existingUser = await prisma.user.create({
                         data: {
                             email: token.email,
                             name: token.name,
-                            id: token.sub,  // Google user ID
+                            id: token.sub,
                         },
                     });
                 }
 
-                token.id = existingUser.id;  // Assign DB ID to session
+                token.id = existingUser.id;
             } else if (user) {
-                token.id = user.id; // Credentials users already have an ID
+                token.id = user.id;
             }
 
             return token;
